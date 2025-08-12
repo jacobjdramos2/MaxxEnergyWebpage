@@ -1,0 +1,7 @@
+/Users/jacobjandekramos/Desktop/Year_Up_United/MaxxEnergyWebpage/back-end/src/main/java/com/maxxenergywebpage/Main.java
+/Users/jacobjandekramos/Desktop/Year_Up_United/MaxxEnergyWebpage/back-end/src/main/java/com/maxxenergywebpage/config/WebConfig.java
+/Users/jacobjandekramos/Desktop/Year_Up_United/MaxxEnergyWebpage/back-end/src/main/java/com/maxxenergywebpage/controller/UserController.java
+/Users/jacobjandekramos/Desktop/Year_Up_United/MaxxEnergyWebpage/back-end/src/main/java/com/maxxenergywebpage/dto/CreateUserRequest.java
+/Users/jacobjandekramos/Desktop/Year_Up_United/MaxxEnergyWebpage/back-end/src/main/java/com/maxxenergywebpage/dto/UpdateUserRequest.java
+/Users/jacobjandekramos/Desktop/Year_Up_United/MaxxEnergyWebpage/back-end/src/main/java/com/maxxenergywebpage/model/User.java
+/Users/jacobjandekramos/Desktop/Year_Up_United/MaxxEnergyWebpage/back-end/src/main/java/com/maxxenergywebpage/repository/UserRepository.java
