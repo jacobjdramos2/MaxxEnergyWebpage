@@ -1,0 +1,249 @@
+/* ---------------------------
+   CSS Variables
+---------------------------- */
+:root {
+  --primary-color: #fbb019;
+  --secondary-color: #ddd;
+  --bg-dark: #000;
+  --bg-light: #f9f9f9;
+  --text-dark: #333;
+  --text-light: #fff;
+  --footer-font: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* ---------------------------
+   Base Layout & Page Structure
+---------------------------- */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: var(--text-dark);
+}
+
+header {
+  background-color: var(--text-dark);
+  color: var(--text-light);
+  padding: 20px;
+  text-align: center;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+  background-color: var(--bg-light);
+}
+
+/* ---------------------------
+   Footer Section
+---------------------------- */
+footer {
+  background-color: black;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  border-top: 5px solid var(--primary-color);
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  max-width: 4000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: end; /* Center text within the container */
+}
+
+.footer-left-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 100%;
+}
+
+.footer-right-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.logo-and-message-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo {
+  width: 180px;
+  height: auto;
+  position: absolute;
+  bottom: 80px; /* space from bottom */
+  right: 120px; /* space from right */
+}
+
+
+footer {
+  position: relative; /* makes absolute positioning work inside footer */
+}
+
+.footer-logo-section {
+  /* Removed absolute positioning */
+  position: static;
+  bottom: auto;
+  right: auto;
+}
+
+.footer-social-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-logo {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  vertical-align: middle;
+}
+
+.social-logo:hover {
+  transform: scale(1.2);
+  opacity: 0.8;
+}
+
+.footer-message p {
+  margin: 0;
+  line-height: 1.4;
+  margin-left: 10px; /* pushes the paragraph 20px to the right */
+  padding-left: 10px; /* adds space inside the paragraph box */
+}
+
+.highlight {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.footer-signup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Change to center if you want */
+  gap: 10px;
+  margin-top: 20px;
+  position: absolute;
+  right: 1200px;
+  bottom: 90px;
+}
+
+.signup-text {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.signup-form {
+  display: flex;
+  gap: 10px;
+}
+
+.signup-form input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  flex: 1;
+  font-size: 14px;
+}
+
+.signup-form button {
+  background-color: #fbb019;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.signup-form button:hover {
+  background-color: #496da7;
+}
+
+
+/* ---------------------------
+   Bottom Bar
+---------------------------- */
+.footer-bottom {
+  border-top: 1px solid #fbb019;
+  padding: 5px 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 90px;
+  width: 100%;
+  max-width: 919px;
+  margin: 0 auto;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 11px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 35px;
+}
+
+.footer-link {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: text-decoration 0.3s ease;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+/* ---------------------------
+   Responsive Adjustments
+---------------------------- */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px 10px;
+  }
+
+  .footer-left-content {
+    max-width: 100%;
+    order: 2;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .footer-right-content {
+    order: 1;
+    gap: 15px;
+  }
+  
+  .footer-logo {
+    width: 140px;
+  }
+  
+  .footer-social-icons {
+    justify-content: center;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    text-align: center;
+  }
+}
