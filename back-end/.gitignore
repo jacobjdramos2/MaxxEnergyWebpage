@@ -1,0 +1,15 @@
+# --- Maven / Java ---
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# --- IDE files ---
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# --- OS / misc ---
+.DS_Store
+*.log
+
