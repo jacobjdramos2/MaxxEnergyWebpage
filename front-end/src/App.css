@@ -1,7 +1,24 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
 .App {
+  /* Make App a flex column to push footer down */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  /* Keep your existing text alignment */
   text-align: center;
 }
 
+/* Main content grows to fill available space */
+main {
+  flex: 1;
+}
+
+/* Your existing logo styles */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -13,6 +30,7 @@
   }
 }
 
+/* Existing header styles remain, but probably used elsewhere */
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -28,6 +46,7 @@
   color: #61dafb;
 }
 
+/* Your logo spin animation */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +54,19 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Add footer styles consistent with your navbar */
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #496DA7; /* same as navbar */
+  color: #fff;
+  font-size: 14px;
+}
+
+.footer p {
+  margin: 0;
 }

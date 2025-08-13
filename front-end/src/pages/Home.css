@@ -1,0 +1,46 @@
+.home-container {
+  padding: 20px;
+  max-width: 600px;      /* Optional: limit width for better reading */
+  margin: 0 auto;        /* centers the container horizontally */
+  text-align: center;    /* center-align all text inside */
+}
+
+.home-container h1 {
+  color: #496DA7;
+  margin: 20px 0 10px 0;    /* remove top margin, keep bottom 10px */
+}
+
+.home-container p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 10px 0;    /* remove top margin, keep bottom 10px */
+}
+
+.home-section {
+  margin-top: 0;         /* remove space above section */
+}
+
+.home-section h2 {
+  color: #496DA7;
+  margin-bottom: 10px;   /* add bottom margin */
+}
+
+.home-section ul {
+  list-style: none;      /* removes bullet points */
+  padding-left: 0;       /* remove default left padding */
+  margin: 0 auto 0 auto; /* center the list horizontally */
+  display: inline-block; /* shrink list width to content */
+  text-align: center;    /* center the text inside the list */
+}
+
+
+.logo-section {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.home-logo {
+  max-width: 200px; /* adjust size as needed */
+  height: auto;
+}

@@ -1,14 +1,16 @@
 import './App.css';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Home from './pages/Home';
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <main style={{ padding: "20px" }}>
-        <h1>Welcome to My Website</h1>
-        <p>This is the homepage content.</p>
+      <main>
+        <Home />
       </main>
+      <Footer />
     </div>
   );
 }
