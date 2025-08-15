@@ -1,6 +1,6 @@
 import React from "react";
 import "./Navbar.css";
-import logo from "../assets/images/navbar-logo-yellow.jpeg"; // adjust path if your logo is elsewhere
+import logo from "../assets/images/navbar-logo-yellow.jpeg";
 
 function Navbar() {
   return (
@@ -19,3 +19,27 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
+// import React from "react";
+// import { Link } from "react-router-dom";
+// import "./Navbar.css";
+// import logo from "../assets/images/navbar-logo-yellow.jpeg";
+
+// function Navbar() {
+//   return (
+//     <nav className="nav">
+//       <Link to="/" className="logo-link">
+//         <img src={logo} alt="MAXX Energy Logo" className="logo-img" />
+//       </Link>
+//       <ul className="nav-links">
+//         <li><Link to="/">Home</Link></li>
+//         <li><Link to="/about">About</Link></li>
+//         <li><Link to="/blog">Blog</Link></li>
+//         <li><Link to="/contact">Contact</Link></li>
+//       </ul>
+//     </nav>
+//   );
+// }
+
+// export default Navbar;
