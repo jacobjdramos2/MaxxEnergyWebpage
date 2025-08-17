@@ -14,7 +14,11 @@ export default function SignUpPage() {
         lastName: '',
         email: '',
         confirmEmail: '',
+        password: '',
+        confirmPassword: '',
     });
+    const [showPassword, setShowPassword] = useState(false);
+
     // Stores error messages for each field after validation
     const [errors, setErrors] = useState({});
     // Tracks if the form is currently sending data to the server (for disabling the submit button & showing "Creating")
@@ -38,6 +42,8 @@ export default function SignUpPage() {
         const ln = values.lastName.trim();
         const em = values.email.trim();
         const cem = values.confirmEmail.trim();
+        const pw = values.password;
+        const cpw = values.confirmPassword;
 
         if (!fn) e.firstName = 'First name is required.';
         if (!ln) e.lastName = 'Last name is required.';
@@ -45,6 +51,11 @@ export default function SignUpPage() {
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) e.email = 'Enter a valid email.';
         if (!cem) e.confirmEmail = 'Confirm email is required.';
         else if (em && cem && em !== cem) e.confirmEmail = 'Emails do not match.';
+
+        if (!pw) e.password = 'Password is required.';
+        else if (pw.length < 8) e.password = 'Use at least 8 characters.';
+        if (!cpw) e.confirmPassword = 'Confirm password is required.';
+        else if (pw && cpw && pw !== cpw) e.confirmPassword = 'Passwords do not match.';
         return e;
     };
 
@@ -165,6 +176,59 @@ export default function SignUpPage() {
                 <div id="confirmEmail-error" style={{ color: 'crimson', fontSize: 12 }}>{errors.confirmEmail}</div>
             )}
             </div>
+
+            {/* Password */}
+            <div style={{ marginBottom: 12 }}>
+            <label htmlFor="password">Password</label><br />
+            <input
+                id="password"
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                value={form.password}
+                onChange={onChange}
+                autoComplete="new-password"
+                aria-invalid={!!errors.password}
+                aria-describedby="password-error"
+                required
+            />
+            {errors.password && (
+                <div id="password-error" style={{ color: 'crimson', fontSize: 12 }}>
+                {errors.password}
+                </div>
+            )}
+            </div>
+
+            {/* Confirm Password */}
+            <div style={{ marginBottom: 12 }}>
+            <label htmlFor="confirmPassword">Confirm password</label><br />
+            <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type={showPassword ? 'text' : 'password'}
+                value={form.confirmPassword}
+                onChange={onChange}
+                autoComplete="new-password"
+                aria-invalid={!!errors.confirmPassword}
+                aria-describedby="confirmPassword-error"
+                required
+            />
+            {errors.confirmPassword && (
+                <div id="confirmPassword-error" style={{ color: 'crimson', fontSize: 12 }}>
+                {errors.confirmPassword}
+                </div>
+            )}
+            </div>
+
+            {/* Toggle visibility for both password fields */}
+            <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+            <input
+                type="checkbox"
+                checked={showPassword}
+                onChange={(e) => setShowPassword(e.target.checked)}
+            />
+            Show password
+            </label>
+
 
             <div style={{ display: 'flex', gap: 12 }}>
             <button type="submit" disabled={disableSubmit}>
