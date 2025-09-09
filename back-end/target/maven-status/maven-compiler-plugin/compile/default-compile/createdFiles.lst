@@ -1,0 +1,9 @@
+com/maxxenergywebpage/service/DataInitializationService.class
+com/maxxenergywebpage/config/SecurityConfig.class
+com/maxxenergywebpage/controller/DashboardController.class
+com/maxxenergywebpage/service/CustomUserDetailsService.class
+com/maxxenergywebpage/model/User.class
+com/maxxenergywebpage/repository/UserRepository.class
+com/maxxenergywebpage/config/CorsConfig.class
+com/maxxenergywebpage/controller/LoginController.class
+com/maxxenergywebpage/Main.class
