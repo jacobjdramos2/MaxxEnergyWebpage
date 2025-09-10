@@ -13,7 +13,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/dashboard/admin', {
+        const response = await fetch('http://localhost:8081/api/dashboard/admin', {
           method: 'GET',
           credentials: 'include',
         });

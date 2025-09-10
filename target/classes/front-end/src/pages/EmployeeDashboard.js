@@ -13,7 +13,7 @@ const EmployeeDashboard = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/dashboard/employee', {
+        const response = await fetch('http://localhost:8081/api/dashboard/employee', {
           method: 'GET',
           credentials: 'include',
         });
