@@ -1,0 +1,9 @@
+Full pages or screens of the app. Think of them as routes.
+
+Examples:
+
+// pages/Home.js
+// pages/About.js
+// pages/Contact.js
+
+These get rendered by react-router-dom or conditionally in App.js.

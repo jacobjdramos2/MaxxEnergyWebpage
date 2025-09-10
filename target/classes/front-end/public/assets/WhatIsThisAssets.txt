@@ -1,0 +1,13 @@
+Static files like images, logos, fonts, or icons.
+
+Structure example:
+
+assets/
+├── images/
+│   └── logo.png
+├── icons/
+└── fonts/
+
+Import these in components or pages:
+
+import logo from '../assets/images/logo.png';

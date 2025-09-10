@@ -1,0 +1,10 @@
+1. components/
+Reusable UI building blocks.
+
+Examples:
+
+// components/Navbar.js
+// components/Button.js
+// components/Footer.js
+
+Use these across different pages.
