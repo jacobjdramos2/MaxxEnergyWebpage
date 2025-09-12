@@ -17,4 +17,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     
     // Find users by role
     Iterable<User> findByRole(String role);
+
+
 }
+

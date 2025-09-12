@@ -7,6 +7,8 @@ import AdminDashboard from './pages/AdminDashboard';
 import EngineerDashboard from './pages/EngineerDashboard';
 import EmployeeDashboard from './pages/EmployeeDashboard';
 import Unauthorized from './pages/Unauthorized';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 // Protected route component
 const ProtectedRoute = ({ children }) => {
@@ -46,6 +48,8 @@ function App() {
               </ProtectedRoute>
             } />
             <Route path="/unauthorized" element={<Unauthorized />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/" element={<Navigate to="/login" />} />
           </Routes>
         </div>

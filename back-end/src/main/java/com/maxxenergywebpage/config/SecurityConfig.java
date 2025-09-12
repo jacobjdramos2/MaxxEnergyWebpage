@@ -48,6 +48,9 @@ public class SecurityConfig {
                 ) // allow cross-origin (React frontend on different port/domain)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/login").permitAll() // API login endpoint open
+                        .requestMatchers("/api/auth/forgot-password").permitAll() // Forgot password endpoint open
+                        .requestMatchers("/api/auth/validate-reset-token").permitAll() // Validate token endpoint open
+                        .requestMatchers("/api/auth/reset-password").permitAll() // Reset password endpoint open
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/dashboard/admin").hasRole("ADMIN")
                         .requestMatchers("/api/dashboard/engineer").hasRole("ENGINEER")
