@@ -8,13 +8,20 @@ const USE_MOCK = false;
 export default function ProfilePage() {
   const navigate = useNavigate();
   const [user, setUser] = useState({ firstName: '', lastName: '', email: '' });
-  const [origUser, setOrigUser] = useState(null); 
+  const [origUser, setOrigUser] = useState(null);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
   const [editMode, setEditMode] = useState(false);
   const fetched = useRef(false);
+
+  // ----- Change Password state -----
+  const [showPwForm, setShowPwForm] = useState(false);
+  const [pw, setPw] = useState({ current: '', next: '', confirm: '' });
+  const [pwErrors, setPwErrors] = useState({});
+  const [pwSaving, setPwSaving] = useState(false);
+  const [showPw, setShowPw] = useState({ current: false, next: false, confirm: false });
 
   const getUserId = () =>
     localStorage.getItem('authUserId') || sessionStorage.getItem('authUserId');
@@ -31,9 +38,30 @@ export default function ProfilePage() {
     return e;
   };
 
+  const validatePw = (p) => {
+    const e = {};
+    const cur = p.current || '';
+    const nxt = p.next || '';
+    const cfm = p.confirm || '';
+    if (!cur) e.current = 'Current password is required.';
+    if (!nxt) e.next = 'New password is required.';
+    else {
+      if (nxt.length < 8) e.next = 'Minimum 8 characters.';
+      if (/\s/.test(nxt)) e.next = 'No spaces allowed.';
+    }
+    if (nxt && cur && nxt === cur) e.next = 'New password must be different.';
+    if (!cfm) e.confirm = 'Please confirm your new password.';
+    else if (nxt !== cfm) e.confirm = 'Passwords do not match.';
+    return e;
+  };
+
   useEffect(() => {
     if (editMode) setErrors(validate(user));
   }, [user, editMode]);
+
+  useEffect(() => {
+    if (showPwForm) setPwErrors(validatePw(pw));
+  }, [pw, showPwForm]);
 
   useEffect(() => {
     if (fetched.current) return;
@@ -83,6 +111,7 @@ export default function ProfilePage() {
   }, [navigate]);
 
   const onChange = (e) => setUser((u) => ({ ...u, [e.target.name]: e.target.value }));
+  const onPwChange = (e) => setPw((p) => ({ ...p, [e.target.name]: e.target.value }));
 
   const startEdit = () => {
     setOrigUser(user); // snapshot
@@ -138,6 +167,52 @@ export default function ProfilePage() {
     }
   };
 
+  // ----- Change Password submit -----
+  const submitPassword = async (e) => {
+    e.preventDefault();
+    setMessage('');
+    const v = validatePw(pw);
+    setPwErrors(v);
+    if (Object.keys(v).length > 0) return;
+
+    const id = getUserId();
+    if (!id) return navigate('/login', { replace: true });
+
+    setPwSaving(true);
+    try {
+      if (!USE_MOCK) {
+        const res = await fetch(`${API_BASE}/api/users/${id}/password`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            currentPassword: pw.current,
+            newPassword: pw.next,
+          }),
+        });
+        if (!res.ok) {
+          const txt = await res.text().catch(() => '');
+          console.error('PW UPDATE FAIL', res.status, txt);
+          if (res.status === 400 || res.status === 401) {
+            setMessage('❌ Current password is incorrect or new password invalid.');
+          } else {
+            setMessage('❌ Failed to change password.');
+          }
+          return;
+        }
+      } else {
+        await new Promise((r) => setTimeout(r, 300));
+      }
+      setPw({ current: '', next: '', confirm: '' });
+      setShowPwForm(false);
+      setMessage('✅ Password updated successfully!');
+    } catch (err) {
+      console.error(err);
+      setMessage('❌ Failed to change password.');
+    } finally {
+      setPwSaving(false);
+    }
+  };
+
   if (loading) return <p>Loading…</p>;
 
   return (
@@ -161,7 +236,114 @@ export default function ProfilePage() {
             <span>{user.email || <em>—</em>}</span>
           </div>
 
-          <button onClick={startEdit}>Edit Profile</button>
+          <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
+            <button onClick={startEdit}>Edit Profile</button>
+            <button
+              type="button"
+              onClick={() => {
+                setShowPwForm((s) => !s);
+                setPwErrors({});
+                setPw({ current: '', next: '', confirm: '' });
+              }}
+            >
+              {showPwForm ? 'Cancel Password Change' : 'Change Password'}
+            </button>
+          </div>
+
+          {showPwForm && (
+            <form onSubmit={submitPassword} noValidate style={{ border: '1px solid #ddd', padding: 16, borderRadius: 8 }}>
+              <h3 style={{ marginTop: 0 }}>Change Password</h3>
+
+              <div style={{ marginBottom: 12 }}>
+                <label htmlFor="current">Current password</label><br />
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <input
+                    id="current"
+                    name="current"
+                    type={showPw.current ? 'text' : 'password'}
+                    value={pw.current}
+                    onChange={onPwChange}
+                    aria-invalid={!!pwErrors.current}
+                    aria-describedby="current-error"
+                    autoComplete="current-password"
+                    required
+                    style={{ flex: 1 }}
+                  />
+                  <button type="button" onClick={() => setShowPw((s) => ({ ...s, current: !s.current }))}>
+                    {showPw.current ? 'Hide' : 'Show'}
+                  </button>
+                </div>
+                {pwErrors.current && (
+                  <div id="current-error" style={{ color: 'crimson', fontSize: 12 }}>{pwErrors.current}</div>
+                )}
+              </div>
+
+              <div style={{ marginBottom: 12 }}>
+                <label htmlFor="next">New password</label><br />
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <input
+                    id="next"
+                    name="next"
+                    type={showPw.next ? 'text' : 'password'}
+                    value={pw.next}
+                    onChange={onPwChange}
+                    aria-invalid={!!pwErrors.next}
+                    aria-describedby="next-error"
+                    autoComplete="new-password"
+                    required
+                    style={{ flex: 1 }}
+                  />
+                  <button type="button" onClick={() => setShowPw((s) => ({ ...s, next: !s.next }))}>
+                    {showPw.next ? 'Hide' : 'Show'}
+                  </button>
+                </div>
+                {pwErrors.next && (
+                  <div id="next-error" style={{ color: 'crimson', fontSize: 12 }}>{pwErrors.next}</div>
+                )}
+              </div>
+
+              <div style={{ marginBottom: 12 }}>
+                <label htmlFor="confirm">Confirm new password</label><br />
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <input
+                    id="confirm"
+                    name="confirm"
+                    type={showPw.confirm ? 'text' : 'password'}
+                    value={pw.confirm}
+                    onChange={onPwChange}
+                    aria-invalid={!!pwErrors.confirm}
+                    aria-describedby="confirm-error"
+                    autoComplete="new-password"
+                    required
+                    style={{ flex: 1 }}
+                  />
+                  <button type="button" onClick={() => setShowPw((s) => ({ ...s, confirm: !s.confirm }))}>
+                    {showPw.confirm ? 'Hide' : 'Show'}
+                  </button>
+                </div>
+                {pwErrors.confirm && (
+                  <div id="confirm-error" style={{ color: 'crimson', fontSize: 12 }}>{pwErrors.confirm}</div>
+                )}
+              </div>
+
+              <div style={{ display: 'flex', gap: 12 }}>
+                <button type="submit" disabled={pwSaving || Object.keys(pwErrors).length > 0}>
+                  {pwSaving ? 'Updating…' : 'Update Password'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowPwForm(false);
+                    setPw({ current: '', next: '', confirm: '' });
+                    setPwErrors({});
+                  }}
+                  disabled={pwSaving}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       ) : (
         // ===== EDIT MODE =====

@@ -1,11 +1,8 @@
 package com.maxxenergywebpage.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-
 public record CreateUserRequest(
-  @NotBlank @Size(max = 255) String firstName,
-  @NotBlank @Size(max = 255) String lastName,
-  @NotBlank @Email @Size(max = 255) String email
+  @jakarta.validation.constraints.NotBlank String firstName,
+  @jakarta.validation.constraints.NotBlank String lastName,
+  @jakarta.validation.constraints.Email     String email,
+  @jakarta.validation.constraints.NotBlank String password
 ) {}

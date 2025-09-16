@@ -1,0 +1,8 @@
+com/maxxenergywebpage/controller/UserController.class
+com/maxxenergywebpage/dto/UpdateUserRequest.class
+com/maxxenergywebpage/dto/CreateUserRequest.class
+com/maxxenergywebpage/model/User.class
+com/maxxenergywebpage/repository/UserRepository.class
+com/maxxenergywebpage/config/WebConfig$1.class
+com/maxxenergywebpage/config/WebConfig.class
+com/maxxenergywebpage/Main.class
